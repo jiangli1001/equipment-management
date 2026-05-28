@@ -1,0 +1,10 @@
+[
+  {"name":"RTK","model":"新的","quantity":1,"location":"湖北京山八字门","responsible_person":"范磊然","status":"正常","remarks":"新购入设备，已配送至京山项目现场"},
+  {"name":"RTK","model":"手机手簿","quantity":1,"location":"庆阳花果山水库管理处","responsible_person":"王小哲","status":"正常","remarks":""},
+  {"name":"无人机","model":"大疆Air3","quantity":1,"location":"办公室415","responsible_person":"王小哲","status":"正常","remarks":""},
+  {"name":"无人机","model":"大疆M4E","quantity":1,"location":"庆阳花果山水库","responsible_person":"王小哲","status":"正常","remarks":""},
+  {"name":"全站仪","model":"巴木墩-拓普康","quantity":1,"location":"办公室415","responsible_person":"许明祥","status":"正常","remarks":""},
+  {"name":"水准仪","model":"巴木墩-拓普康","quantity":1,"location":"办公室415","responsible_person":"许明祥","status":"正常","remarks":""},
+  {"name":"测试音柱","model":"系统开发测试","quantity":1,"location":"办公室419","responsible_person":"许明祥","status":"维修中","remarks":"系统开发测试用途"},
+  {"name":"电测水位计","model":"JC-01","quantity":1,"location":"办公室416","responsible_person":"王小哲","status":"正常","remarks":""}
+]
