@@ -2,13 +2,14 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 
 export async function login(phone: string, password: string) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-  const supabase = createClient(supabaseUrl, anonKey);
+  const supabase = createClient(supabaseUrl, anonKey, {
+    auth: { persistSession: false },
+  });
 
   const { data, error } = await supabase.auth.signInWithPassword({
     email: `${phone}@team.eq`,
@@ -40,5 +41,5 @@ export async function login(phone: string, password: string) {
     );
   }
 
-  redirect('/');
+  return { success: true };
 }
