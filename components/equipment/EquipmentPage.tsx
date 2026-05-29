@@ -68,33 +68,47 @@ export default function EquipmentPage({ equipment, stats }: Props) {
       <div className="p-6 animate-fadeIn">
         {/* 统计卡片 */}
         <div className="grid grid-cols-4 gap-5 mb-6">
-          {statConfig.map(({ key, label, color, icon }) => (
-            <div
-              key={key}
-              className={`stat-card stat-card-${color} bg-bg-container rounded-xl p-5 border border-border hover:shadow-md transition-all duration-300 cursor-default`}
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <div className="text-[13px] text-text-secondary font-medium mb-2 tracking-wide">
-                    {label}
+          {statConfig.map(({ key, label, color, icon }) => {
+            const gradients: Record<string, string> = {
+              blue: 'from-indigo-50 to-blue-50 border-indigo-100',
+              green: 'from-emerald-50 to-teal-50 border-emerald-100',
+              orange: 'from-amber-50 to-orange-50 border-amber-100',
+              red: 'from-rose-50 to-red-50 border-rose-100',
+            };
+            const iconBg: Record<string, string> = {
+              blue: 'bg-gradient-to-br from-indigo-500 to-blue-600 text-white shadow-indigo-500/25',
+              green: 'bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-emerald-500/25',
+              orange: 'bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-amber-500/25',
+              red: 'bg-gradient-to-br from-rose-500 to-red-600 text-white shadow-rose-500/25',
+            };
+            const dotColor: Record<string, string> = {
+              blue: 'bg-indigo-500',
+              green: 'bg-emerald-500',
+              orange: 'bg-amber-500',
+              red: 'bg-rose-500',
+            };
+            return (
+              <div
+                key={key}
+                className={`stat-card stat-card-${color} relative overflow-hidden bg-gradient-to-br ${gradients[color]} rounded-xl border hover:shadow-lg transition-all duration-300 cursor-default`}
+              >
+                <div className="p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[12px] font-semibold text-text-secondary uppercase tracking-wider">{label}</span>
+                    <div className={`w-2.5 h-2.5 rounded-full ${dotColor[color]}`} />
                   </div>
-                  <div className="text-[32px] font-bold text-text-primary leading-none tracking-tight">
+                  <div className="text-[36px] font-extrabold text-text-primary leading-none tracking-tighter tabular-nums">
                     {stats[key as keyof typeof stats]}
                   </div>
                 </div>
-                <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                  color === 'blue' ? 'bg-primary-bg text-primary' :
-                  color === 'green' ? 'bg-success-bg text-success' :
-                  color === 'orange' ? 'bg-warning-bg text-warning' :
-                  'bg-error-bg text-error'
-                }`}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <div className={`absolute -bottom-3 -right-3 w-20 h-20 ${iconBg[color]} rounded-2xl flex items-center justify-center opacity-20 rotate-12`}>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d={icon}/>
                   </svg>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* 表格卡片 */}
@@ -162,7 +176,7 @@ export default function EquipmentPage({ equipment, stats }: Props) {
                     <th>负责人</th>
                     <th className="w-[85px]">状态</th>
                     <th>更新日期</th>
-                    <th className="w-[120px]">操作</th>
+                    <th className="w-[120px] text-center">操作</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -183,9 +197,9 @@ export default function EquipmentPage({ equipment, stats }: Props) {
                         {new Date(item.updated_at).toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' })}
                       </td>
                       <td>
-                        <div className="flex items-center gap-1">
-                          <Link href={`/equipment/${item.id}`} className="inline-flex items-center px-2.5 py-1 text-[13px] text-text-secondary hover:text-primary hover:bg-primary-bg rounded-md transition-all no-underline">详情</Link>
-                          <Link href={`/equipment/${item.id}/edit`} className="inline-flex items-center px-2.5 py-1 text-[13px] text-text-secondary hover:text-primary hover:bg-primary-bg rounded-md transition-all no-underline">编辑</Link>
+                        <div className="flex items-center justify-center gap-1.5">
+                          <Link href={`/equipment/${item.id}`} className="inline-flex items-center px-3 py-1 text-[13px] font-medium text-primary bg-primary-bg hover:bg-primary hover:text-white rounded-md transition-all no-underline">详情</Link>
+                          <Link href={`/equipment/${item.id}/edit`} className="inline-flex items-center px-3 py-1 text-[13px] font-medium text-primary bg-primary-bg hover:bg-primary hover:text-white rounded-md transition-all no-underline">编辑</Link>
                         </div>
                       </td>
                     </tr>
