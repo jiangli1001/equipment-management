@@ -68,47 +68,33 @@ export default function EquipmentPage({ equipment, stats }: Props) {
       <div className="p-6 animate-fadeIn">
         {/* 统计卡片 */}
         <div className="grid grid-cols-4 gap-5 mb-6">
-          {statConfig.map(({ key, label, color, icon }) => {
-            const gradients: Record<string, string> = {
-              blue: 'from-indigo-50 to-blue-50 border-indigo-100',
-              green: 'from-emerald-50 to-teal-50 border-emerald-100',
-              orange: 'from-amber-50 to-orange-50 border-amber-100',
-              red: 'from-rose-50 to-red-50 border-rose-100',
-            };
-            const iconBg: Record<string, string> = {
-              blue: 'bg-gradient-to-br from-indigo-500 to-blue-600 text-white shadow-indigo-500/25',
-              green: 'bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-emerald-500/25',
-              orange: 'bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-amber-500/25',
-              red: 'bg-gradient-to-br from-rose-500 to-red-600 text-white shadow-rose-500/25',
-            };
-            const dotColor: Record<string, string> = {
-              blue: 'bg-indigo-500',
-              green: 'bg-emerald-500',
-              orange: 'bg-amber-500',
-              red: 'bg-rose-500',
-            };
-            return (
-              <div
-                key={key}
-                className={`stat-card stat-card-${color} relative overflow-hidden bg-gradient-to-br ${gradients[color]} rounded-xl border hover:shadow-lg transition-all duration-300 cursor-default`}
-              >
-                <div className="p-5">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-[12px] font-semibold text-text-secondary uppercase tracking-wider">{label}</span>
-                    <div className={`w-2.5 h-2.5 rounded-full ${dotColor[color]}`} />
+          {statConfig.map(({ key, label, color, icon }) => (
+            <div
+              key={key}
+              className={`stat-card stat-card-${color} bg-bg-container rounded-xl p-5 border border-border hover:shadow-md transition-all duration-300 cursor-default`}
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <div className="text-[12px] font-medium text-text-secondary tracking-wide uppercase mb-2">
+                    {label}
                   </div>
-                  <div className="text-[36px] font-extrabold text-text-primary leading-none tracking-tighter tabular-nums">
+                  <div className="text-[34px] font-bold text-text-primary leading-none tracking-tight tabular-nums">
                     {stats[key as keyof typeof stats]}
                   </div>
                 </div>
-                <div className={`absolute -bottom-3 -right-3 w-20 h-20 ${iconBg[color]} rounded-2xl flex items-center justify-center opacity-20 rotate-12`}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                  color === 'blue' ? 'bg-primary/10 text-primary' :
+                  color === 'green' ? 'bg-success/10 text-success' :
+                  color === 'orange' ? 'bg-warning/10 text-warning' :
+                  'bg-error/10 text-error'
+                }`}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                     <path d={icon}/>
                   </svg>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
 
         {/* 表格卡片 */}
