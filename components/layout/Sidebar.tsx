@@ -10,8 +10,9 @@ const menuItems = [
     href: '/',
     label: '设备总览',
     icon: (
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M2 2h5v5H2V2zm0 7h5v5H2V9zm7-7h5v5H9V2zm0 7h5v5H9V9z"/>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
       </svg>
     ),
   },
@@ -19,8 +20,8 @@ const menuItems = [
     href: '/logs',
     label: '变更记录',
     icon: (
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M8 1a7 7 0 110 14A7 7 0 018 1zm0 1.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zm.5 2v3.086l2.207 2.207-.707.707L7.5 8V4.5h1z"/>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/>
       </svg>
     ),
   },
@@ -51,61 +52,62 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-[220px] bg-sidebar-bg fixed top-0 left-0 h-screen z-50 flex flex-col flex-shrink-0">
+    <aside className="w-[230px] bg-sidebar-bg fixed top-0 left-0 h-screen z-50 flex flex-col flex-shrink-0">
       {/* Logo */}
-      <div className="h-14 flex items-center px-6 border-b border-white/8">
-        <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center text-white text-base font-bold mr-2 flex-shrink-0">
+      <div className="h-[60px] flex items-center px-5 border-b border-white/[0.06]">
+        <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center text-white text-base font-bold mr-3 flex-shrink-0 shadow-lg shadow-primary/25">
           仪
         </div>
-        <span className="text-white text-[15px] font-semibold whitespace-nowrap">
-          仪器设备管理
-        </span>
+        <div>
+          <div className="text-white text-[14px] font-semibold leading-tight">仪器设备管理</div>
+          <div className="text-[11px] text-sidebar-text leading-tight">Equipment Manager</div>
+        </div>
       </div>
 
       {/* Menu */}
-      <nav className="flex-1 py-2">
-        <div className="px-3 mb-1">
-          <div className="text-[11px] text-white/35 uppercase tracking-wider px-2 py-1">
-            功能菜单
-          </div>
+      <nav className="flex-1 py-3 px-3">
+        <div className="text-[10px] text-sidebar-text/50 uppercase tracking-[1px] font-semibold px-3 mb-2">
+          功能菜单
         </div>
-        {menuItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`flex items-center mx-3 my-0.5 px-2 py-[9px] rounded-md text-sm text-sidebar-text no-underline transition-all duration-200 ${
-              isActive(item.href)
-                ? 'bg-primary text-white'
-                : 'hover:text-white hover:bg-sidebar-hover'
-            }`}
-          >
-            <span className="w-4 h-4 mr-2 flex items-center justify-center flex-shrink-0">
-              {item.icon}
-            </span>
-            {item.label}
-          </Link>
-        ))}
+        <div className="space-y-0.5">
+          {menuItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`flex items-center px-3 py-2.5 rounded-lg text-[14px] no-underline transition-all duration-200 ${
+                isActive(item.href)
+                  ? 'bg-primary text-white shadow-md shadow-primary/20'
+                  : 'text-sidebar-text hover:text-white hover:bg-white/[0.04]'
+              }`}
+            >
+              <span className="w-[18px] h-[18px] mr-3 flex items-center justify-center flex-shrink-0 opacity-80">
+                {item.icon}
+              </span>
+              {item.label}
+            </Link>
+          ))}
+        </div>
       </nav>
 
       {/* User info */}
-      <div className="p-3 border-t border-white/8">
-        <div className="flex items-center px-2 py-1 text-sidebar-text text-[13px]">
-          <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm mr-2 flex-shrink-0">
+      <div className="p-3 border-t border-white/[0.06]">
+        <div className="flex items-center px-2 py-1.5 rounded-lg hover:bg-white/[0.03] transition-colors group">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary-active text-white flex items-center justify-center text-xs font-bold mr-2.5 flex-shrink-0 shadow-sm">
             管
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-white text-[13px]">管理员</div>
-            <div className="text-[11px] text-sidebar-text truncate">
+            <div className="text-white text-[13px] font-medium leading-tight">管理员</div>
+            <div className="text-[11px] text-sidebar-text leading-tight truncate">
               {userPhone || '---'}
             </div>
           </div>
           <button
             onClick={handleLogout}
-            className="ml-1 p-1 rounded text-sidebar-text hover:text-white hover:bg-sidebar-hover transition-colors duration-200 border-0 bg-transparent cursor-pointer"
+            className="ml-1 p-1.5 rounded-md text-sidebar-text/40 hover:text-white hover:bg-white/[0.06] transition-all border-0 bg-transparent cursor-pointer opacity-0 group-hover:opacity-100"
             title="退出登录"
           >
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M6 2v2H3v8h3v2H2V2h4zm4 3l3 3-3 3-.707-.707L11.586 8H6V7h5.586L9.293 4.293 10 5z"/>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
             </svg>
           </button>
         </div>
